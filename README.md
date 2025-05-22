@@ -12,13 +12,14 @@ An AI Voice Assistant web platform combining **6 smart voice modules** including
 2. [🚀 Features](#-features)  
 3. [🗂️ Project Structure](#-project-structure)
 4. [🧰 Tech Stack](#-tech-stack)
-5. [⚙️ Installation](#-installation)  
+5. [⚙️ Installation](#-installation)
 6. [✅ Feature Details](#-feature-details)
-7. [🧪 Known Issuess](#-known-issues)
-8. [🧭 Future Work](#-future-work)  
-9. [📄 License](#-license)
-10. [🤝 Contributing](#-contributing)
-11. [📬 Contact](#-contact)
+7. [🛠 How It Works (Behind the Scenes)](#-how-it-works)
+8. [🧪 Known Issuess](#-known-issues)
+9. [🧭 Future Work](#-future-work)  
+10. [📄 License](#-license)
+11. [🤝 Contributing](#-contributing)
+12. [📬 Contact](#-contact)
 
 ---
 
@@ -107,9 +108,10 @@ python flask_app.py
 Then open your browser: http://127.0.0.1:5000
 
 ---
+
 ## ✅ Feature Details
 
-### 1.  Voice Transcription
+### 1. Voice Transcription
 - Uses Whisper model to transcribe audio files or mic input.
 - Auto language detection & punctuation recovery.
 ### 2. TTS Answering
@@ -125,9 +127,20 @@ Then open your browser: http://127.0.0.1:5000
 ### 5. Document Q&A
 - Upload voice question (.wav)
 - Uses Whisper to transcribe → SentenceTransformer + ChromaDB to retrieve doc context → Falcon or LLM to answer.
-### 6.  Podcast Summarization
+### 6. Podcast Summarization
 - Upload long ``.wav`` podcast → splits into chunks → summarizes using BART-based model.
 - Summary returned as paragraph.
+
+---
+## 🛠 How It Works (Behind the Scenes)
+Each feature operates through a dedicated **audio or NLP processing pipeline**:
+
+### 1. Voice Transcription
+- **Input:** ``.wav`` file recorded from the user
+- **Process:**
+  - The **Whisper** model converts the audio waveform into a **log-Mel spectrogram**.
+  - A multilingual decoder processes the spectrogram and generates the corresponding **text transcription**.
+- **Output:** Clean, normalized text
 
 
 --- 

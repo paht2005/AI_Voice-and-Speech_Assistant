@@ -6,7 +6,7 @@
 </head>
 <body>
   <h1>🤖 AI Voice Assistant Dashboard</h1>
-  <h3>Select category</h3>
+  <h3>Select Feature:</h3>
 
   <!-- Transcription -->
   <form action="/transcribe" method="post" enctype="multipart/form-data">
@@ -36,6 +36,7 @@
     <input type="file" name="audio" required>
     <button type="submit">Detect Emotion</button>
   </form>
+  <a href="/emotion_chart">📊 Xem biểu đồ thống kê cảm xúc</a>
 
   <!-- Voice Q&A -->
   <form action="/qa" method="post" enctype="multipart/form-data">
@@ -50,5 +51,72 @@
     <input type="file" name="podcast" required>
     <button type="submit">Summarize</button>
   </form>
+</body>
+</html>
+
+<!-- templates/result.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title }}</title>
+</head>
+<body>
+  <h2>{{ title }}</h2>
+
+  {% if result %}
+    <pre>{{ result }}</pre>
+  {% endif %}
+
+  {% if audio_url %}
+    <audio controls>
+      <source src="/{{ audio_url }}" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+  {% endif %}
+
+  <br><a href="/">⬅️ Quay lại Trang chính</a>
+</body>
+</html>
+
+<!-- templates/emotion_chart.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Emotion Chart</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h2>📊 Emotion Distribution</h2>
+  <canvas id="emotionChart" width="600" height="400"></canvas>
+  <script>
+    const ctx = document.getElementById('emotionChart');
+    const emotionChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: {{ labels|safe }},
+        datasets: [{
+          label: 'Emotion Count',
+          data: {{ values|safe }},
+          backgroundColor: 'rgba(75, 192, 192, 0.5)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              precision: 0
+            }
+          }
+        }
+      }
+    });
+  </script>
+  <br><a href="/">⬅️ Quay lại Trang chính</a>
 </body>
 </html>

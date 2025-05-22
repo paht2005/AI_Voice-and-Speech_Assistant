@@ -31,7 +31,7 @@ def transcribe():
 def tts():
     text = request.form['text']
     speak_text_offline(text, output_file='static/tts_output.wav')
-    return render_template('result.html', title='TTS Output', audio_url='static/tts_output.wav')
+    return render_template('result.html', title='TTS Output', audio_url=url_for('static', filename='tts_output.wav'))
 
 @app.route('/clone', methods=['POST'])
 def clone():

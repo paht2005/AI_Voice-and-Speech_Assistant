@@ -13,7 +13,7 @@ An AI Voice Assistant web platform combining **6 smart voice modules** including
 3. [🗂️ Project Structure](#-project-structure)
 4. [🧰 Tech Stack](#-tech-stack)
 5. [⚙️ Installation & Setup](#-installation-&-setup)  
-6. [✅ Feature Details](#-features-details)
+6. [✅ Feature Details](#-feature-details)
 7. [🧪 Known Issuess](#-known-issues)
 8. [🧭 Future Work](#-future-work)  
 9. [📄 License](#-license)

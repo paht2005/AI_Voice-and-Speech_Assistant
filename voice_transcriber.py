@@ -28,3 +28,10 @@ def transcribe_from_mic():
         return f"[❌] Could not transcribe: {e}"
     
 # Call it with: transcribe_from_mic()
+
+"""
+Key Concepts
+    - speech_recognition: Works with online Google API (lightweight)
+    - whisper: More accurate, multilingual, works offline
+    - pydub/ffmpeg: Needed for audio conversion if using MP3s
+"""

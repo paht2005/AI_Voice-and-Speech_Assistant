@@ -10,3 +10,4 @@ scikit-learn
 numpy 
 torch 
 matplotlib
+nltk

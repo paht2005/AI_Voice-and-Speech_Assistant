@@ -5,3 +5,8 @@ TTS #  Optionally download models: tts --list_models
 chromadb 
 sentence-transformers
 transformers
+librosa 
+scikit-learn 
+numpy 
+torch 
+matplotlib

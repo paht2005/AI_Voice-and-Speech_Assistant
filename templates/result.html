@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title }}</title>
+</head>
+<body>
+  <h2>{{ title }}</h2>
+
+  {% if result %}
+    <pre>{{ result }}</pre>
+  {% endif %}
+
+  {% if audio_url %}
+    <audio controls>
+      <source src="/{{ audio_url }}" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+  {% endif %}
+
+  <br><a href="/">⬅️ Quay lại Trang chính</a>
+</body>
+</html>

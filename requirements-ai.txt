@@ -11,3 +11,4 @@ numpy
 torch 
 matplotlib
 nltk
+flask

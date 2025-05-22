@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Voice Assistant</title>
+</head>
+<body>
+  <h1>🤖 AI Voice Assistant Dashboard</h1>
+  <h3>Select category</h3>
+
+  <!-- Transcription -->
+  <form action="/transcribe" method="post" enctype="multipart/form-data">
+    <h4>1. Voice Transcription</h4>
+    <input type="file" name="audio" required>
+    <button type="submit">Transcribe</button>
+  </form>
+
+  <!-- TTS -->
+  <form action="/tts" method="post">
+    <h4>2. Text-to-Speech</h4>
+    <textarea name="text" placeholder="Enter text here" required></textarea>
+    <button type="submit">Generate Voice</button>
+  </form>
+
+  <!-- Voice Cloning -->
+  <form action="/clone" method="post" enctype="multipart/form-data">
+    <h4>3. Voice Cloning</h4>
+    <textarea name="text" placeholder="Text to speak" required></textarea><br>
+    <input type="file" name="speaker_audio" required>
+    <button type="submit">Clone & Speak</button>
+  </form>
+
+  <!-- Emotion Detection -->
+  <form action="/emotion" method="post" enctype="multipart/form-data">
+    <h4>4. Emotion Detection</h4>
+    <input type="file" name="audio" required>
+    <button type="submit">Detect Emotion</button>
+  </form>
+
+  <!-- Voice Q&A -->
+  <form action="/qa" method="post" enctype="multipart/form-data">
+    <h4>5. Voice Document Q&A</h4>
+    <input type="file" name="audio" required>
+    <button type="submit">Ask Question</button>
+  </form>
+
+  <!-- Podcast Summary -->
+  <form action="/summarize" method="post" enctype="multipart/form-data">
+    <h4>6. Podcast Summarizer</h4>
+    <input type="file" name="podcast" required>
+    <button type="submit">Summarize</button>
+  </form>
+</body>
+</html>

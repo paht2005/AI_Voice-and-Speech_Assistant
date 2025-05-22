@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Emotion Chart</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h2>📊 Emotion Distribution</h2>
+  <canvas id="emotionChart" width="600" height="400"></canvas>
+  <script>
+    const ctx = document.getElementById('emotionChart');
+    const emotionChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: {{ labels|safe }},
+        datasets: [{
+          label: 'Emotion Count',
+          data: {{ values|safe }},
+          backgroundColor: 'rgba(75, 192, 192, 0.5)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              precision: 0
+            }
+          }
+        }
+      }
+    });
+  </script>
+  <br><a href="/">⬅️ Main Page</a>
+</body>
+</html>

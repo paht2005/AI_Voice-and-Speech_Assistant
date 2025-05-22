@@ -141,11 +141,11 @@ Then open your browser: http://127.0.0.1:5000
 
 --- 
 ## 🧭 Future Work
-- ✅ Add user authentication layer
-- ✅ Add database backend (SQLite/PostgreSQL)
-- 📷 Real-time camera price scanner
-- 🌐 Host web UI (Streamlit or Flask Web)
-- 🧪 Add automated tests (PyTest)
+-  Add real-time streaming voice interface
+- WebSocket for fast speech interaction
+- Export as REST API (for mobile use)
+- Integrate multi-lingual support (Vietnamese, etc.)
+- User auth system for personalized interaction
 ---
 ## 📄 License
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.

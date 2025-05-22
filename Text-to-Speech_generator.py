@@ -3,6 +3,15 @@
 # ✅ Feature 2: Text-to-Speech (Voice Answering)
 # 🎯 Objective: Convert text-based answers into natural-sounding speech using either ElevenLabs (cloud-based) or Coqui TTS (offline, open-source).
 
+
+
+from TTS.api import TTS
+
+def speak_text_offline(text, output_file="output.wav"):
+    tts = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC") # Load multilingual or English model
+    tts.tts_to_file(text=text, file_path=output_file)
+
+
 """
 Technical Description
 -----------
@@ -16,9 +25,3 @@ Two implementation paths are supported:
 Voice synthesis is a critical component of human-computer interaction, and this feature enables the assistant to 
 respond audibly—bridging the gap between typed output and real-world voice communication.
 """
-
-from TTS.api import TTS
-
-def speak_text_offline(text, output_file="output.wav"):
-    tts = TTS(model_name="tts_models/en/ljspeech/tacotron2-DDC") # Load multilingual or English model
-    tts.tts_to_file(text=text, file_path=output_file)

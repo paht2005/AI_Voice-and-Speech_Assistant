@@ -3,27 +3,6 @@
 # ✅ Feature 3: Voice Cloning
 # 🎯 Objective: Generate synthetic speech that mimics the user's voice, using a short reference audio clip.
 
-"""
-✍️ Technical Description
-This module enables voice cloning, allowing the system to replicate the speaker’s unique vocal characteristics — such as tone, 
-pitch, and accent — to produce personalized text-to-speech (TTS) output.
-
-To clone a voice, the system requires:
-- A short reference WAV audio clip of the target voice (at least 3–5 seconds, mono, 16kHz).
-- A multispeaker TTS model with support for speaker embeddings.
-
-The process involves:
-- Extracting the speaker embedding from the reference audio.
-- Using that embedding during TTS synthesis to generate speech that sounds like the original speaker.
-
-Coqui TTS's your_tts or other speaker-conditioned models are commonly used for this task, and can run fully offline.
-
-This feature is particularly useful for:
-- Creating personalized AI assistants.
-- Generating audio content in a consistent speaker voice.
-- Accessibility solutions using familiar voices.
-"""
-
 from TTS.api import TTS as TTS_Clone
 
 def clone_and_speak(text, speaker_audio, output_file="cloned.wav"): #  Use a .wav file of someone speaking and make sure it’s mono, 16kHz, WAV format
@@ -46,4 +25,27 @@ Feature Summary
     - Output: Synthesized audio mimicking the original speaker
     - Framework: Coqui TTS ( your_tts or vits + speaker embedding)
     - Use Cases: Personalized AI, content creation, accessibility
+"""
+
+
+"""
+✍️ Technical Description
+-----------
+This module enables voice cloning, allowing the system to replicate the speaker’s unique vocal characteristics — such as tone, 
+pitch, and accent — to produce personalized text-to-speech (TTS) output.
+
+To clone a voice, the system requires:
+- A short reference WAV audio clip of the target voice (at least 3–5 seconds, mono, 16kHz).
+- A multispeaker TTS model with support for speaker embeddings.
+
+The process involves:
+- Extracting the speaker embedding from the reference audio.
+- Using that embedding during TTS synthesis to generate speech that sounds like the original speaker.
+
+Coqui TTS's your_tts or other speaker-conditioned models are commonly used for this task, and can run fully offline.
+
+This feature is particularly useful for:
+- Creating personalized AI assistants.
+- Generating audio content in a consistent speaker voice.
+- Accessibility solutions using familiar voices.
 """

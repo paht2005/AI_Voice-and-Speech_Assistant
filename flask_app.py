@@ -68,4 +68,4 @@ def summarize():
     return render_template('result.html', title='Podcast Summary', result=summary)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=False)

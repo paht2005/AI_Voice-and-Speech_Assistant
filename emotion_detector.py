@@ -3,22 +3,27 @@
 # ✅ Feature 5: Emotion Detection
 # 🎯 Objective: Analyze a speaker's voice to detect emotional states such as happy, sad, angry, or neutral.
 
-
+import torch
 import librosa
 import numpy as np
 import joblib
+from train_emotion_cnn import EmotionCNN, extract_mfcc_2d
 
-# Feature Extraction – MFCCs
-def extract_mfcc(path):
-    y, sr = librosa.load(path, duration=3, offset=0.5)
-    mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=40)
-    return np.mean(mfcc.T, axis=0)
+# Load model
+model = EmotionCNN(num_classes=8)
+model.load_state_dict(torch.load("emotion_cnn.pth"))
+model.eval()
 
-# Predict Emotion for New Audio
-def predict_emotion(audio_path, model_path="emotion_model.pkl"): # audio in .wav format file
-    model = joblib.load(model_path)
-    feature = extract_mfcc(audio_path).reshape(1, -1)
-    return model.predict(feature)[0]
+# Load label encoder
+le = joblib.load("emotion_label_encoder.pkl")
+
+def predict_emotion(audio_path):
+    mfcc = extract_mfcc_2d(audio_path)
+    x = torch.tensor(mfcc[np.newaxis, np.newaxis, :, :], dtype=torch.float32)
+    with torch.no_grad():
+        output = model(x)
+        pred = torch.argmax(output, dim=1).item()
+    return le.inverse_transform([pred])[0]
 
 """
 1) Key Concepts

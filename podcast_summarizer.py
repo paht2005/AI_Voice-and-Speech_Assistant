@@ -2,10 +2,13 @@
 
 # ✅ Feature 6: Podcast Summarizer
 # 🎯 Objective: Automatically summarize long-form audio content such as podcasts into concise bullet points or highlights.
+import nltk 
+nltk.download('punkt') 
 
 import whisper
 from nltk.tokenize import sent_tokenize
 from transformers import pipeline
+
 
 def summarize_podcast(audio_path): # audio in .wav format file
     # Transcribe the Podcast

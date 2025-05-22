@@ -29,7 +29,7 @@ def extract_features(file_path):
 
 # Load dataset
 X, y = [], []
-data_dir = "ravdess/"
+data_dir = "ravdess-data/"
 
 for file in os.listdir(data_dir):
     if file.endswith(".wav"):

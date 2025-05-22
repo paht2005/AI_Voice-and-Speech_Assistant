@@ -1,3 +1,4 @@
 openai-whisper
 speechrecognition
 pydub # pydub is needed to handle .mp3 or convert formats
+TTS #  Optionally download models: tts --list_models

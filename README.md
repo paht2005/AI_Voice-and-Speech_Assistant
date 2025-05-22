@@ -14,7 +14,7 @@ An AI Voice Assistant web platform combining **6 smart voice modules** including
 4. [🧰 Tech Stack](#-tech-stack)
 5. [⚙️ Installation & Setup](#-installation-&-setup)  
 6. [✅ Feature Details](#-features-details)
-7. [🐛 Known Issues](#-known-issues)
+7. [🧪 Known Issuess](#-known-issues)
 8. [🧭 Future Work](#-future-work)  
 9. [📄 License](#-license)
 10. [🤝 Contributing](#-contributing)
@@ -111,63 +111,34 @@ Then open your browser: http://127.0.0.1:5000
 ### 1.  Voice Transcription
 - Uses Whisper model to transcribe audio files or mic input.
 - Auto language detection & punctuation recovery.
-### 2. Drug Similarity
-```bash
-Input: SMILES of Paracetamol
-Output: Ibuprofen (0.72), Naproxen (0.68)...
-```
-### 3. Conversational Doctor
-```bash
-User: I have a headache
-Doctor: Have you also experienced nausea or light sensitivity?
-```
-### 4. Rule vs LLM Diagnosis
-```bash
-Rule-based: Flu
-LLM-based: Possible viral infection. Rest and hydration advised.
-```
-### 5. Review Analyzer
-```bash
-Sentiment: POSITIVE (0.96)
-Aspects: ['staff', 'service']
-Summary: The service was fast and staff very helpful.
-```
-### 6. POS Invoice
-```bash
-Paracetamol x2 = $3.00
-ORS Pack x1 = $0.80
-Total = $3.80
-```
-### 7. Churn Prediction
-```bash
-Input: {'tenure': 1, 'contract': 'month-to-month'}
-Result: ⚠️ Leaving Risk
-```
-### 8. Loan Approval
-```bash
-Input: age=25, income=50000, credit_score=700
-Result: ✅ Approved
-```
-### 9. Sales Forecast
-```bash
-Output file: forecast.csv with predicted 'yhat' values
-```
-### 10. Barcode & Price Scanner
-```bash
-Output: ['$5.99', '$12.49'] from image with shelf tags
-```
+### 2. TTS Answering
+- Enter any text → generate voice using Coqui TTS model.
+- Output saved as ``static/tts_output.wav``.
+### 3. Voice Cloning
+- Upload a 3–5 sec voice sample (.wav).
+- Type any text → generates response in that speaker's voice.
+### 4. Emotion Detection (CNN)
+- Trained using RAVDESS dataset.
+- Input ``.wav`` → predicts 1 of 8 emotions.
+- Model: ``CNN + MFCC`` → ``emotion_cnn.pth``
+### 5. Document Q&A
+- Upload voice question (.wav)
+- Uses Whisper to transcribe → SentenceTransformer + ChromaDB to retrieve doc context → Falcon or LLM to answer.
+### 6.  Podcast Summarization
+- Upload long ``.wav`` podcast → splits into chunks → summarizes using BART-based model.
+- Summary returned as paragraph.
+
 
 --- 
-## 🚀 Enhancements in CLI & AP
-### CLI Mode (``main_cli_app.py``)
-- Select options 1–10 from a simple numbered interface
-- Inputs handled via keyboard
-- Forecast saved as CSV
+## 🧪 Known Issues
 
-### API Mode (``main_api_app.py``)
-- Exposes ``/predict_churn``, ``/diagnose``, ``/chat``, ``/forecast``, etc.
-- Accepts JSON payloads
-- Can be plugged into a frontend later (e.g., React/Flutter)
+| Issue                         | Cause                       | Solution                                                                |
+|-------------------------------|-----------------------------|-------------------------------------------------------------------------
+| **❗ Whisper FP16 Warningn**  | No GPU                      | Ignore or use GPU for speed                                            |   
+| **❌ ``punkt`` not found**    | NLTK missing tokenizer      | Run ``nltk.download('punkt')``                                         |
+| **❌ Audio shape mismatchg**  | CNN flatten mismatch        | Use dynamic flatten in CNN                                             |
+| **❌ ffmpeg not found**       | Whisper depends on it       | [Install ffmpeg](https://ffmpeg.org/download.html) & add to PATH       |
+
 --- 
 ## 🧭 Future Work
 - ✅ Add user authentication layer

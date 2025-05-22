@@ -51,6 +51,7 @@ An AI Voice Assistant web platform combining **6 smart voice modules** including
 ## 🗂️ Project Structure
 ```
 ├── flask_app.py                  # Flask web app
+├── __pycache__/  
 ├── images/                     
 ├── ravdess-data/                     # RAVDESS dataset
 ├── templates/                     # HTML interface

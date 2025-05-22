@@ -9,7 +9,7 @@
 import whisper
 import speech_recognition as sr
 
-def transcribe_from_file(audio_path):
+def transcribe_from_file(audio_path): # Audio File Transcription with Whisper
     model = whisper.load_model("base") # or use "small", "medium", "large
     result = model.transcribe(audio_path)
     print("📝Transcribed Text:\n", result["text"])
@@ -17,7 +17,7 @@ def transcribe_from_file(audio_path):
 
 # Call it with: transcribe_from_file("audio_sample.mp3")
 
-def transcribe_from_mic():
+def transcribe_from_mic(): # Live Mic Transcription
     recognizer = sr.Recognizer()
     with sr.Microphone() as source:
         print("🎤 Speak now...")
@@ -29,9 +29,22 @@ def transcribe_from_mic():
     
 # Call it with: transcribe_from_mic()
 
+def save_transcription(text, output_file="transcript.txt"): # Save Transcription to a File
+    with open(output_file, "w") as f:
+        f.write(text)
+    print(f"✅Saved transcription to {output_file}")
+
 """
 Key Concepts
     - speech_recognition: Works with online Google API (lightweight)
     - whisper: More accurate, multilingual, works offline
     - pydub/ffmpeg: Needed for audio conversion if using MP3s
 """
+"""
+Feature Summary
+    - Input: Microphone or audio file (MP3, WAV)
+    - Model: Google STT or OpenAI Whisper
+    - Output: Transcribed text (terminal or saved)
+    - Use Case: Podcasts, lectures, meetings, accessibility tools
+"""
+

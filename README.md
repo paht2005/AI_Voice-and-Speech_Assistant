@@ -142,7 +142,45 @@ Each feature operates through a dedicated **audio or NLP processing pipeline**:
   - A multilingual decoder processes the spectrogram and generates the corresponding **text transcription**.
 - **Output:** Clean, normalized text
 
+### 2. Text-to-Speech (TTS) Answering
+- **Input:** Text string generated or typed by the user
+- **Process:**
+  - A **Tacotron2** model (or similar) converts text to a **mel-spectrogram**.
+  - A **vocoder** (e.g., HiFi-GAN, WaveGlow) synthesizes audio from the spectrogram.
+  - Optionally, the voice output is adjusted using a **cloned speaker embedding**.
+- **Output:** ``tts_output.wav`` file saved in ``/static/`` directory
 
+### 3. Voice Cloning
+- **Input:** A reference voice ``.wav`` file + target text
+- **Process:**
+  - Extract a **speaker embedding** from the input voice.
+  - Use a multi-speaker TTS model to synthesize speech that matches the **tone and identity** of the reference speaker.
+- **Output:** Synthetic speech in the cloned voice
+
+### 4. Emotion Detection (CNN)
+- **Input:** A short audio segment 
+- **Process:**
+  - Extract **MFCC (Mel-Frequency Cepstral Coefficients)** features.
+  - Feed the MFCC vector into a **2-layer CNN** or classifier.
+  - Predict one of several emotion classes: e.g., ``angry``, ``happy``, ``sad``, etc.
+- **Output:** Detected emotion label (among 8 predefined classes)
+
+### 5. Document Q&A (RAG)
+- **Input:** Spoken question from the user
+- **Process:**
+  - **Whisper** transcribes the spoken query into text.
+  - The query is embedded using **SentenceTransformer**.
+  - A **vector search** is performed using **ChromaDB** to find relevant documents.
+  - A **language model (LLM)** generates the final answer using the retrieved context.
+- **Output:** Answer in natural language (text)
+
+### 6. Podcast Summarization
+- **Input:** Long-form ``.wav`` file (e.g., podcast, recorded lecture)
+- **Process:**
+  - **Whisper** transcribes the full audio into text.
+  - The transcript is **chunked** into manageable segments.
+  - Each segment is summarized using a model like **BART** or **DistilBART**.
+- **Output:** Final summary as paragraph or structured bullet points.
 --- 
 ## 🧪 Known Issues
 

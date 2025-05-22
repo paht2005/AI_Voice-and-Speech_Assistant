@@ -12,9 +12,9 @@ An AI Voice Assistant web platform combining **6 smart voice modules** including
 2. [🚀 Features](#-features)  
 3. [🗂️ Project Structure](#-project-structure)
 4. [🧰 Tech Stack](#-tech-stack)
-5. [⚙️ Installation](#-installation)  
-6. [✅ Example Output](#-example-output)
-7. [🚀 Enhancements in CLI & API](#-enhancements-in-cli-&-api)
+5. [⚙️ Installation & Setup](#-installation-&-setup)  
+6. [✅ Feature Details](#-features-details)
+7. [🐛 Known Issues](#-known-issues)
 8. [🧭 Future Work](#-future-work)  
 9. [📄 License](#-license)
 10. [🤝 Contributing](#-contributing)
@@ -24,52 +24,49 @@ An AI Voice Assistant web platform combining **6 smart voice modules** including
 
 ## ✨ Project Overview
 
-### 1. This is a multi-module AI system designed to assist pharmacy operations and decision-making. It combines:
-- AI-based medical consultation & triage
-- Sales forecasting using Prophet
-- OCR-powered barcode & price extraction
-- Drug suggestion from symptoms
-- Inventory checkout/invoice system
-- NLP-based review analytics
-- Machine learning-based loan/churn predictions
-### 2. Run from:
-- `main_cli_app.py` for interactive CLI
-- `main_api_app.py` for RESTful API
+### 1. This voice assistant toolkit empowers users with:
+- Transcription from audio to text
+- Conversational voice responses
+- Real-time Q&A over documents via speech
+- Emotion detection via CNN model
+- Long podcast summarization
+- Voice cloning and TTS using speaker sample
+### 2. Accessible through a simple Flask UI for demonstration & prototyping.
 
 ---
 
 ## 🚀 Features
 
-| Module                     | Description                                         |
-|----------------------------|-----------------------------------------------------|
-| ``Symptom Checker``        | Map symptoms to conditions & suggest drugs          |
-| ``Drug Similarity``        | Tanimoto similarity via RDKit                       |
-| ``Medical Chatbot``        | Falcon7B-based conversation agent                   |
-| ``Rule & LLM Diagnosis``   | Rule-based + LLM triage assistant                   |
-| ``Review Analyzer``        | Extract aspects, sentiment, summary                 |
-| ``POS Invoice``            | Product checkout & subtotal calculator              |
-| ``Churn Predictor``        |  Classify if customer will leave                    |
-| ``Loan Approver``          | Predict loan approval based on profile              |
-| ``Sales Forecast``         | Predict future sales via Prophet                    |
-| ``Barcode/Price OCR``      |Detect & extract price from image                    |
+| Feature Name                         | Description                                                | Technique/Model Used                                  |
+|--------------------------------------|------------------------------------------------------------|--------------------------------------------------------
+| **Voice Transcription**              | Convert audio (mic/file) into text                         | ``Whisper`` (openai/whisper base)                     |   
+| **Text-to-Speech (TTS) Answering**   | Generate voice output from text                            | ``CoquiTTS`` / ``Tacotron2-DDC``                      |
+| **Voice Cloning**                    | Clone user voice & read text                               | ``YourTTS`` / ``speaker_wav`` TTS synthesis           |
+| **Emotion Detection**                | Detect emotion from voice (e.g., angry, sad)               | ``CNN`` + ``MFCC`` (custom trained on RAVDESS)        |
+| **Document Q&A**                     | Ask voice-based questions over documents                   | ``Whisper`` + ``ChromaDB`` + ``SentenceTransformer``  |
+| **Podcast Summarizer**               | Transcribe & summarize long podcasts into bullet summary   | ``Whisper`` + ``BART``/``DistilBART`` summarizer      |
+
 
 ---
 ## 🗂️ Project Structure
 ```
-├── main_cli_app.py           # CLI app for testing all modules
-├── main_api_app.py           # Flask REST API
-├── requirements.txt          # Python dependencies
-├── churn_predictor.py
-├── conversation.py           # GPT2-based doctor agent
-├── drug_similarity.py        # RDKit similarity search
-├── loan_checker.py
-├── management_medical.py     # Rule-based + LLM symptom analysis
-├── pos_backend.py
-├── review_analyzer.py        # spaCy + Transformers
-├── sales_forecast.py         # Prophet forecasting
-├── scan_and_price_check.py   # EasyOCR based
-├── symptom_suggester.py      # Symptom rule-based lookup
-├── style.css                 # Optional styling for UI
+├── flask_app.py                  # Flask web app
+├── images/                     
+├── ravdess-data/                     # RAVDESS dataset
+├── templates/                     # HTML interface
+├── static/                        # Output audio files
+├── uploads/                       # Uploaded inputs
+├── voice_transcriber.py           # Feature 1
+├── Text_to_Speech_generator.py    # Feature 2
+├── voice_cloner.py                # Feature 3
+├── emotion_detector.py       # Feature 4 (CNN)
+├── voice_rag_agent.py            # Feature 5
+├── podcast_summarizer.py         # Feature 6
+├── train_emotion_cnn.py          # CNN training script
+├── train_emotion_model.py          # RandomForest training script
+├── emotion_cnn.pth               # Trained CNN weights
+├── emotion_label_encoder.pkl     # Label encoder for emotion
+├── requirements-ai.txt                     # Python dependencies
 └── README.md
 └── LICENSE
 
@@ -78,42 +75,42 @@ An AI Voice Assistant web platform combining **6 smart voice modules** including
 
 ## 🧰 Tech Stack
 
-| Purpose                  | Library                                 |
-|------------------------  |-----------------------------------------|
-| **LLM/Chat/Summary**     | ``Transformers``, ``Falcon-7B-Instruct``|
-| **Medical Triage**       | ``Rule-based + LLM``                    |
-| **Forecasting**          | ``Prophet``                             |
-| **OCR Barcode Reader**   | ``EasyOCR``, ``OpenCV``                 |
-| **NLP Review Analyzer**  | ``spaCy``, ``Transformers``             |
-| **ML Prediction**        | ``Scikit-learn`` (RF)                   |
-| **Drug Similarity**      | ``RDKit``                               |
-| **Invoice Management**   | ``pandas``                              |
-| **CLI Interface**        | ``Python I/O``                          |
-| **API (optional)**       | ``Flask``                               |
+| Purpose                  | Libraries Used                                        |
+|--------------------------|-------------------------------------------------------|
+| **Transcription**        | ``whisper``, ``ffmpeg``                               |
+| **Text-to-Speech**       | ``TTS``, ``CoquiTTS``                                 |
+| **Cloning**              | ``yourTTS``, `sentence-transformers`, `transformers`  |
+| **Q&A, Embedding**       | ``EasyOCR``, ``OpenCV``                               |
+| **Emotion Detection**    | ``PyTorch``, ``librosa``, `scikit-learn``, `joblib``  |
+| **Summarization**        | ``transformers`` (``distilbart-cnn-12-6``)            |
+| **Web UI**               | ``Flask`, ``Jinja2`, `HTML5`                          |
+
 
 ---
 
-## ⚙️ Installation
+## ⚙️ Installation & Setup
 
 ```bash
-git clone https://github.com/paht2005/pharmacy-ai-suite.git
-cd pharmacy-ai-suite
-pip install -r requirements.txt
+# Clone repository
+git clone https://github.com/paht2005/ai-voice-assistant-suite.git
+cd ai-voice-assistant-suite
 
-# CLI Mode:
-python main_cli_app.py
+# Install dependencies
+pip install -r requirements-ai.txt
 
-# REST API Mode:
-python main_api_app.py
+# Run Flask web app
+python flask_app.py
+
+
 ```
+Then open your browser: http://127.0.0.1:5000
+
 ---
-## ✅ Example Output
+## ✅ Feature Details
 
-### 1. Symptom Checker
-```bash
-Input: fever cough fatigue
-Output: Condition: Flu | Suggested Drug: Paracetamol
-```
+### 1.  Voice Transcription
+- Uses Whisper model to transcribe audio files or mic input.
+- Auto language detection & punctuation recovery.
 ### 2. Drug Similarity
 ```bash
 Input: SMILES of Paracetamol
